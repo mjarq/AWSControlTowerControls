@@ -1,0 +1,68 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+
+  Template to deploy the AWS Conrol Tower Controls management solution 
+
+Globals:
+  Function:
+    Timeout: 600
+
+Parameters:
+   paraetername:
+     Type: String
+     Default: abc
+
+Resources:
+  ControlsManagerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: app/
+      Handler: manageControls.controls_handler
+      Runtime: python3.8
+      Role: !GetAtt ControlsManagerRole.Arn
+      Events:
+        Schedule:
+          Type: Schedule
+          Properties:
+            Input: ''
+            Schedule: cron(0 /4 * * ? *)
+            Enabled: True
+      Environment:
+        Variables:
+          CONTROLS_CONFIG: "controls/controls_config.csv"
+      Tags:
+        Environment: "Dev"
+        DeploymentType: "CloudFormation"
+        ApplicationName: "TestApp"
+        Compliance: "NIST"
+
+  ControlsManagerRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: 'controltower-controls-manager-role'
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: 'Allow'
+            Principal:
+              Service:
+                - 'lambda.amazonaws.com'
+            Action:
+              - 'sts:AssumeRole'
+      Policies:
+        - AWSLambdaVPCAccessExecutionRole
+        - AWSLambdaVPCAccessExecutionRole
+      Tags:
+        - Key: Environment
+          Value: "Dev"
+        - Key: DeploymentType
+          Value: "CloudFormation"
+        - Key: ApplicationName
+          Value: "TestApp"
+        - Key: Compliance
+          Value: "NIST"
+
+Outputs:
+  ComplianceCheckerFunction:
+    Value: !GetAtt ControlsManagerFunction.Arn

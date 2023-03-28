@@ -1,0 +1,6 @@
+Control ARN,Control ID,Operation(1 = Enable; 0 = Disable),OU ARN,Control Name,Control Owner
+arn:aws:controltower:ap-southeast-2::control/AWS-GR_CLOUDTRAIL_CHANGE_PROHIBITED,AWS-GR_CLOUDTRAIL_CHANGE_PROHIBITED,1,arn:aws:organizations::767553978670:ou/o-ebxh6y105c/ou-gmox-ewh4yevm,Disallow configuration changes to CloudTrail,AWS Control Tower
+arn:aws:controltower:ap-southeast-2::control/YLOHXVLEFUBG,SH.EC2.21,1,arn:aws:organizations::767553978670:ou/o-ebxh6y105c/ou-gmox-ewh4yevm,Network ACLs should not allow ingress from 0.0.0.0/0 to port 22 or port 3389,AWS Security Hub
+arn:aws:controltower:ap-southeast-2::control/QNCIIGXDITVK,SH.EC2.1,1,arn:aws:organizations::767553978670:ou/o-ebxh6y105c/ou-gmox-ewh4yevm,EBS snapshots should not be publicly restorable,AWS Security Hub
+arn:aws:controltower:ap-southeast-2::control/VSUCLWGVQLDF,SH.EC2.15,0,arn:aws:organizations::767553978670:ou/o-ebxh6y105c/ou-gmox-ewh4yevm,EC2 subnets should not automatically assign public IP addresses,AWS Security Hub
+arn:aws:controltower:ap-southeast-2::control/AJFFKKXRAFMB,SH.EC2.22,1,arn:aws:organizations::767553978670:ou/o-ebxh6y105c/ou-gmox-ewh4yevm,Unused EC2 security groups should be removed,AWS Security Hub
